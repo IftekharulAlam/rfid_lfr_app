@@ -26,13 +26,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Future getProfileInfo(String ID, String typeOf) async {
+Future controlCar(String status) async {
   http.Response response = await http.post(
-      Uri.parse("http://192.168.0.100:8000/getProfileInfo"),
-      body: {"ID": ID, "type": typeOf});
+      Uri.parse("http://192.168.0.100:8000/controlCar"),
+      body: {"status": status});
 
   if (response.statusCode == 200) {
-    return jsonDecode(response.body);
+    // return jsonDecode(response.body);
   } else {
     throw Exception("Error loading data");
   }
@@ -57,7 +57,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: ElevatedButton(
               child: const Text('Start'),
-              onPressed: () {},
+              onPressed: () {
+                controlCar("Start");
+              },
             ),
           ),
           const SizedBox(
@@ -69,7 +71,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: ElevatedButton(
               child: const Text('Stop'),
-              onPressed: () {},
+              onPressed: () {
+                 controlCar("Stop");
+              },
             ),
           ),
         ],
